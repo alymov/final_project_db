@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Covid page info</title>
+</head>
+<body>
+    <header class='header'>
+        <div class="header_links">
+            <p><a href="/" class="header__link">Covid Statistic</a></p>
+			<p><a href="/about" class="header__link">About COVID-19</a></p>
+			<p><a href="/what" class="header__link">What to do?</a></p>
+			<p><a href="/vac" class="header__link">Vaccination</a></p>
+            <p><a href="/admin" class="header__link">Admin</a></p>
+			<p>Unified hotline<br>(8-8212)255-455</p>
+		</div>
+    </header>
+    <main class="main">
+        <section class="attention">
+            <div class="attention__container">
+                <h2 class="attention__title">Берегите себя и окружащих!</h2>
+            </div>
+            <div class="attention__circle attention__circle_1"></div>
+            <div class="attention__circle attention__circle_2"></div>
+            <div class="attention__circle attention__circle_3"></div>
+            <div class="attention__image"></div>
+
+
+        </section>
+        <section class="statistic">
+            <div class="statistic__block">
+                <div class="statistic__container">
+                    <p class="statistic__number statistic__number_danger">1000</p>
+                    <h4 class="statistic__title">Число случаев</h4>
+                </div>
+                <div class="statistic__container">
+                    <p class="statistic__number statistic__number_danger">100</p>
+                    <h4 class="statistic__title">Число случаев в сутки</h4>
+                </div>
+                <div class="statistic__container">
+                    <p class="statistic__number statistic__number_green">20000</p>
+                    <h4 class="statistic__title">Выздоровшие</h4>
+                </div>
+                <div class="statistic__container">
+                    <p class="statistic__number">50000</p>
+                    <h4 class="statistic__title">Умершие</h4>
+                </div>
+            </div>
+            <div class="box__shadow"></div>
+        </section>
+
+        <section class="charts">
+            <canvas id="first__chart" class="charts__chart" width='800' height='400'></canvas>
+            <canvas id="second__chart" class="charts__chart" width='800' height='400'></canvas>
+        </section>
+
+
+
+        <section class="table">
+            <form action="" class="table__form_input">
+                <input type="text" class="table__input">
+                <button type="submit" class="table__button">Find</button>
+            </form>
+            <div class="table__container">
+                <ul class="table__row">
+                    <li class="table__column table__column_bold table__column_country">Country</li>
+                    <li class="table__column table__column_bold table__column_iso">iso code</li>
+                    <li class="table__column table__column_bold table__column_date">date</li>
+                    <li class="table__column table__column_bold table__column_tv">total vaccinations</li>
+                    <li class="table__column table__column_bold table__column_pv">people vaccinated</li>
+                    <li class="table__column table__column_bold table__column_pfv">people fully vaccinated</li>
+                    <li class="table__column table__column_bold table__column_dv">daily vaccinations</li>
+                    <li class="table__column table__column_bold table__column_tvp">total vaccinations percent</li>
+                    <li class="table__column table__column_bold table__column_pvp">people vaccinated percent</li>
+                </ul>
+                {% for data in data_sets %}
+                    <ul class="table__row">
+                        <li class="table__column table__column_country">{{ data[0] }}</li>
+                        <li class="table__column table__column_iso">{{ data[1] }}</li>
+                        <li class="table__column table__column_date">{{ data[2] }}</li>
+                        <li class="table__column table__column_tv">{{ data[3] }}</li>
+                        <li class="table__column table__column_pv">{{ data[4] }}</li>
+                        <li class="table__column table__column_pfv">{{ data[5] }}</li>
+                        <li class="table__column table__column_dv">{{ data[7] }}</li>
+                        <li class="table__column table__column_tvp">{{ data[8] }}</li>
+                        <li class="table__column table__column_pvp">{{ data[9] }}</li>
+                        <li class="table__column table__column_pvp"><img src="{{ url_for('static', filename='images/china.png')}}" alt="" width="60px" height="60px"></li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="table">
+            <div class="table__container">
+                <ul class="table__row">
+                    <li class="table__column table__column_vaccines table__column_bold">Vaccines</li>
+                    <li class="table__column table__column_total table__column_bold">Total</li>
+                </ul>
+                {% for vaccin in vaccins %}
+                    <ul class="table__row">
+                        <li class="table__column table__column_vaccines">{{ vaccin[0] }}</li>
+                        <li class="table__column table__column_total">{{ vaccin[1] }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </section>
+
+       <section class="link-country">
+           <a href="/countries" class="link-country__button">See countries</a>
+       </section>
+
+        <footer class="footer">
+            <p class="footer__text">COVID-19 Page info&copy;2021</p>
+        </footer>
+
+    </main>
+    <script>
+        var ctx1 = document.getElementById("first__chart");
+        var first__chart = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ["USA", "Russia", "Kazakhstan", "Kanada", "Japan", "China", "England"],
+                datasets: [
+                    {
+                        label: 'Сколько вакцин выделенно в странах',
+                        data: [15, 15, 20, 25, 25, 30, 30],
+                        fill: false,
+                        borderColor: '#2DA5FA',
+                        lineTension: 0.1,
+                        stepped: 'middle',
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                interaction: {
+                    intersect: false,
+                    axis: 'x'
+                }
+            }
+        });
+        var ctx2 = document.getElementById("second__chart");
+        var second__chart = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: ["USA", "Russia", "Kazakhstan", "Kanada", "Japan", "China", "England"],
+                datasets: [
+                    {
+                        label: 'Сколько вакцин выделенно в странах',
+                        data: [15, 15, 20, 25, 25, 30, 30],
+                        fill: false,
+                        borderColor: '#2DA5FA',
+                        lineTension: 0.1,
+                        stepped: 'middle',
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                interaction: {
+                    intersect: false,
+                    axis: 'x'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

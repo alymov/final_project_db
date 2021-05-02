@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <style>
+        .add-block{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .add-block__form{
+            width: 80%;
+            padding: 20px;
+            margin: 10px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: #2DA5FA solid 2px;
+            background-color: #2DA5FA;
+
+            border-radius: 20px;
+        }
+
+        .add-block__input{
+            margin-right: 10px;
+            margin-bottom: 10px;
+
+            border: #2DA5FA solid 2px;
+            border-radius: 15px;
+            padding-left: 10px;
+            background-color: rgb(255, 255, 255, 0.7);
+        }
+
+        .add-block__submit{
+            background-color: white;
+            color: black;
+            border: #2DA5FA;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 10px;
+            transition: 1s;
+            margin: 0;
+            margin-bottom: 0;
+            margin-bottom: 20px;
+
+            font-weight: bold;
+        }
+
+        .table{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .table_container{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .table__row{
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        .table__column{
+            border: #2DA5FA solid 1px;
+            padding: 5px;
+            display: flex;
+        }
+
+        .table__column_country{
+            width: 150px;
+        }
+
+        .table__column_iso{
+            width: 80px;
+        }
+
+        .table__column_date,
+        .table__column_tv,
+        .table__column_pv,
+        .table__column_pfv,
+        .table__column_dv,
+        .table__column_tvp,
+        .table__column_pvp{
+            width: 100px;
+        }
+
+        .table__form_input{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            margin-bottom: 20px;
+        }
+
+        .table__input{
+            border: #2DA5FA solid 2px;
+            border-radius: 15px;
+            padding-left: 10px;
+            background-color: rgb(255, 255, 255, 0.7);
+            width: 70%;
+            margin-right: 10px;
+        }
+
+        .table__button{
+            width: 100px;
+            background-color: transparent;
+            color: black;
+            border: #2DA5FA;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 10px;
+        }
+        .table__column_change-link{
+            color: orange;
+        }
+        .table__column_del-link{
+            color: red;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <section class="add-block">
+        <form method="post" enctype="multipart/form-data" class="add-block__form" action="/update">
+            <input class="add-block__input" name="country" type="text" placeholder="country" value="{{ vacs[0] }}">
+            <input class="add-block__input" name="iso_code" type="text" placeholder="iso code" value="{{ vacs[1] }}">
+            <input class="add-block__input" name="vaccination_date" type="text" placeholder="vaccination date" value="{{ vacs[2] }}">
+            <input class="add-block__input" name="total_vaccinations" type="text" placeholder="total vaccinations" value="{{ vacs[3] }}">
+            <input class="add-block__input" name="people_vaccinated" type="text" placeholder="people vaccinated" value="{{ vacs[4] }}">
+            <input class="add-block__input" name="people_fully_vaccinated" type="text" placeholder="people fully vaccinated" value="{{ vacs[5] }}">
+            <input class="add-block__input" name="daily_vaccination_raw" type="text" placeholder="daily vaccination raw" value="{{ vacs[6] }}">
+            <input class="add-block__input" name="daily_vaccinations" type="text" placeholder="daily vaccination" value="{{ vacs[7] }}">
+            <input class="add-block__input" name="total_vaccination_per_hundred" type="text" placeholder="total vaccination per hundred" value="{{ vacs[8] }}">
+            <input class="add-block__input" name="people_vaccination_per_hundred" type="text" placeholder="people vaccination per hundred" value="{{ vacs[9] }}">
+            <input class="add-block__input" name="fully_vaccinated_per_hundred" type="text" placeholder="fully vaccinated per hundred" value="{{ vacs[10] }}">
+            <input class="add-block__input" name="daily_vaccinations_per_million" type="text" placeholder="daily vaccinations per million" value="{{ vacs[11] }}">
+            <input class="add-block__input" name="vaccines" type="text" placeholder="vaccines" value="{{ vacs[12] }}">
+            <input class="add-block__input" name="source_name" type="text" placeholder="source name" value="{{ vacs[13] }}">
+            <input class="add-block__input" name="source_website" type="text" placeholder="source website" value="{{ vacs[14] }}">
+
+            <input type="file" name="file" id="document__file" class="add-block__file-input">
+
+            <input name="id" type="hidden" value="{{ vacs[16] }}">
+
+            <button class="add-block__submit" type="submit">Update</button>
+        </form>
+    </section>
+</body>
+</html>

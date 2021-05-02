@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <style>
+        .add-block{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+        .add-block__form{
+            width: 80%;
+            padding: 20px;
+            margin: 10px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: #2DA5FA solid 2px;
+            background-color: #2DA5FA;
+            
+            border-radius: 20px;
+        }
+
+        .add-block__input{
+            margin-right: 10px;
+            margin-bottom: 10px;
+
+            border: #2DA5FA solid 2px;
+            border-radius: 15px;
+            padding-left: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .add-block__submit{
+            background-color: white;
+            color: black;
+            border: #2DA5FA; 
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 10px;
+            transition: 1s;
+            margin: 0;
+            margin-bottom: 0;
+            margin-bottom: 20px;
+
+            font-weight: bold;
+        }
+
+        .table{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .table_container{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .table__row{
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        .table__column{
+            border: #2DA5FA solid 1px;
+            padding: 5px;
+            display: flex;
+        }
+
+        .table__column_country{
+            width: 150px;
+        }
+
+        .table__column_iso{
+            width: 80px;
+        }
+
+        .table__column_date, 
+        .table__column_tv, 
+        .table__column_pv,
+        .table__column_pfv,
+        .table__column_dv,
+        .table__column_tvp,
+        .table__column_pvp{
+            width: 100px;
+        }
+
+        .table__form_input{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            margin-bottom: 20px;
+        }
+
+        .table__input{
+            border: #2DA5FA solid 2px;
+            border-radius: 15px;
+            padding-left: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            width: 70%;
+            margin-right: 10px;
+        }
+
+        .table__button{
+            width: 100px;
+            background-color: transparent;
+            color: black;
+            border: #2DA5FA; 
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 10px;
+        }
+        .table__column_change-link{
+            color: orange;
+        }
+        .table__column_del-link{
+            color: red;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <section class="add-block">
+        <form method="post" enctype="multipart/form-data" class="add-block__form" action="/insert">
+            <input class="add-block__input" name="country" type="text" placeholder="country">
+            <input class="add-block__input" name="iso_code" type="text" placeholder="iso code">
+            <input class="add-block__input" name="vaccination_date" type="text" placeholder="vaccination date">
+            <input class="add-block__input" name="total_vaccinations" type="text" placeholder="total vaccinations">
+            <input class="add-block__input" name="people_vaccinated" type="text" placeholder="people vaccinated">
+            <input class="add-block__input" name="people_fully_vaccinated" type="text" placeholder="people fully vaccinated">
+            <input class="add-block__input" name="daily_vaccination_raw" type="text" placeholder="daily vaccination raw">
+            <input class="add-block__input" name="daily_vaccinations" type="text" placeholder="daily vaccination">
+            <input class="add-block__input" name="total_vaccination_per_hundred" type="text" placeholder="total vaccination per hundred">
+            <input class="add-block__input" name="people_vaccination_per_hundred" type="text" placeholder="people vaccination per hundred">
+            <input class="add-block__input" name="fully_vaccinated_per_hundred" type="text" placeholder="fully vaccinated per hundred">
+            <input class="add-block__input" name="daily_vaccinations_per_million" type="text" placeholder="daily vaccinations per million">
+            <input class="add-block__input" name="vaccines" type="text" placeholder="vaccines">
+            <input class="add-block__input" name="source_name" type="text" placeholder="source name">
+            <input class="add-block__input" name="source_website" type="text" placeholder="source website">
+
+            <input type="file" name="file" id="document__file" class="add-block__file-input">
+
+            <button class="add-block__submit" type="submit">Add</button>
+        </form>
+    </section>
+
+    <section class="table">
+        <form class="table__form_input" method="POST">
+            <input type="text" class="table__input" name="search">
+            <button type="submit" class="table__button">Find</button>
+        </form>
+
+        <div class="table_container">
+            <ul class="table__row">
+                <li class="table__column table__column_country">Country</li>
+                <li class="table__column table__column_iso">iso code</li>
+                <li class="table__column table__column_date">date</li>
+                <li class="table__column table__column_tv">total vaccinations</li>
+                <li class="table__column table__column_pv">people vaccinated</li>
+                <li class="table__column table__column_pfv">people fully vaccinated</li>
+                <li class="table__column table__column_dv">daily vaccinations</li>
+                <li class="table__column table__column_tvp">total vaccinations percent</li>
+                <li class="table__column table__column_pvp">people vaccinated percent</li>
+            </ul>
+            {% for data in data_sets %}
+                <ul class="table__row">
+                    <li class="table__column table__column_country">{{ data[0] }}</li>
+                    <li class="table__column table__column_iso">{{ data[1] }}</li>
+                    <li class="table__column table__column_date">{{ data[2] }}</li>
+                    <li class="table__column table__column_tv">{{ data[3] }}</li>
+                    <li class="table__column table__column_pv">{{ data[4] }}</li>
+                    <li class="table__column table__column_pfv">{{ data[5] }}</li>
+                    <li class="table__column table__column_dv">{{ data[6] }}</li>
+                    <li class="table__column table__column_tvp">{{ data[7] }}</li>
+                    <li class="table__column table__column_pvp">{{ data[8] }}</li>
+                    <li class="table__column"><a href="/update/{{ data[16] }}" class="table__column_change-link">Change</a></li>
+                    <li class="table__column"><a href="/delete/{{ data[16] }}" class="table__column_del-link">Del</a></li>
+                </ul>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

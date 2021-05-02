@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Covid page info</title>
+</head>
+<body>
+    <header class='header'>
+        <div class="header_links">
+            <p><a href="/" class="header__link">Covid Statistic</a></p>
+			<p><a href="/about" class="header__link">About COVID-19</a></p>
+			<p><a href="/what" class="header__link">What to do?</a></p>
+			<p><a href="/vac" class="header__link">Vaccination</a></p>
+            <p><a href="/admin" class="header__link">Admin</a></p>
+			<p>Unified hotline<br>(8-8212)255-455</p>
+		</div>
+    </header>
+    <main class="main">
+        <section class="attention">
+            <div class="attention__container">
+                <h2 class="attention__title">Берегите себя и окружащих!</h2>
+            </div>
+            <div class="attention__circle attention__circle_1"></div>
+            <div class="attention__circle attention__circle_2"></div>
+            <div class="attention__circle attention__circle_3"></div>
+            <div class="attention__image"></div>
+        </section>
+
+        <section class="table">
+            <div class="table__container">
+                <ul class="table__list">
+                    <li class="table__list_li table__column_bold">Country</li>
+                </ul>
+                {% for country in countries %}
+                <ul class="table__list">
+                    <li class="table__list_li">{{ country[0] }}</li>
+                </ul>
+                {% endfor %}
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p class="footer__text">COVID-19 Page info&copy;2021</p>
+        </footer>
+    </main>
+</body>
+</html>
